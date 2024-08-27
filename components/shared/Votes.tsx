@@ -38,6 +38,7 @@ const Votes = ({
   const router = useRouter();
 
   const handleSave = async () => {
+    if (!userId) return;
     await toggleSaveQuestion({
       userId: JSON.parse(userId),
       questionId: JSON.parse(itemId),
@@ -55,6 +56,8 @@ const Votes = ({
       //   title: "Please log in",
       //   description: "You must be logged in to perform this action",
       // });
+
+      return;
     }
 
     if (action === "upvote") {

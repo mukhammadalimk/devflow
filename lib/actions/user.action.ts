@@ -18,7 +18,9 @@ import { FilterQuery } from "mongoose";
 import Tag from "@/database/tag.model";
 import Answer from "@/database/answer.model";
 
-export async function getUserById(userId: string) {
+export async function getUserById(params: { userId: string }) {
+  const { userId } = params;
+
   try {
     connectToDatabase();
 
