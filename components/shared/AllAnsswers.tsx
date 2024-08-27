@@ -57,8 +57,8 @@ const AllAnswers = async ({
                     {answer.author.name}
                   </p>
 
-                  <p className="small-regular text-light400_light500 ml-0.5 mt-0.5 line-clamp-1">
-                    <span className="max-sm:hidden"> • </span> answered{" "}
+                  <p className="small-regular text-light400_light500 mt-0.5 line-clamp-1">
+                    <span className="max-sm:hidden ml-1 mr-1">•</span>answered{" "}
                     {getTimestamp(answer.createdAt)}
                   </p>
                 </div>
