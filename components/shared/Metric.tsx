@@ -24,7 +24,7 @@ const Metric = ({
   const metricContent = (
     <>
       <Image
-        src={"/assets/icons/avatar.svg"}
+        src={imgUrl}
         width={16}
         height={16}
         alt={alt}

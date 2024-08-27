@@ -24,12 +24,10 @@ export async function getUserById(userId: string) {
 }
 
 export async function createUser(userData: CreateUserParams) {
-  console.log("userData:", userData);
   try {
     connectToDatabase();
 
     const newUser = await User.create(userData);
-    console.log("newUser:", newUser);
 
     return newUser;
   } catch (error) {
