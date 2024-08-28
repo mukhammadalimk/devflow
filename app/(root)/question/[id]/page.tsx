@@ -9,7 +9,7 @@ import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import AllAnswers from "@/components/shared/AllAnsswers";
+import AllAnswers from "@/components/shared/AllAnswers";
 import Votes from "@/components/shared/Votes";
 
 const Page = async ({ params, searchParams }: any) => {
