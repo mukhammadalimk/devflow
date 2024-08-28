@@ -51,6 +51,7 @@ export async function getAllTags(params: GetAllTagsParams) {
 
     let sortOptions = {};
 
+    console.log("filter:", filter);
     switch (filter) {
       case "popular":
         sortOptions = { questions: -1 };

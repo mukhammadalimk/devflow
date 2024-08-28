@@ -14,7 +14,6 @@ import Votes from "@/components/shared/Votes";
 
 const Page = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();
-  console.log("clerkId:", clerkId);
 
   let mongoUser;
 
