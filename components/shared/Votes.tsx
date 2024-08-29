@@ -10,7 +10,7 @@ import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { toast } from "../ui/use-toast";
 
 interface Props {
@@ -21,6 +21,7 @@ interface Props {
   hasupVoted: boolean;
   downvotes: number;
   hasdownVoted: boolean;
+  authorId: string;
   hasSaved?: boolean;
 }
 
@@ -30,10 +31,12 @@ const Votes = ({
   userId,
   upvotes,
   hasupVoted,
+  authorId,
   downvotes,
   hasdownVoted,
   hasSaved,
 }: Props) => {
+  const [isVoting, setIsVoting] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -51,6 +54,12 @@ const Votes = ({
   };
 
   const handleVote = async (action: string) => {
+    console.log("isVoting 58:", isVoting);
+    if (isVoting) {
+      console.log("Request not allowed");
+      return;
+    }
+
     if (!userId) {
       // return toast({
       //   title: "Please log in",
@@ -59,6 +68,13 @@ const Votes = ({
 
       return;
     }
+
+    if (userId === authorId) {
+      console.log(`You can not ${action} your ${type}`);
+      return;
+    }
+
+    setIsVoting(true);
 
     if (action === "upvote") {
       if (type === "Question") {
@@ -69,6 +85,7 @@ const Votes = ({
           hasdownVoted,
           path: pathname,
         });
+        setIsVoting(false);
       } else if (type === "Answer") {
         await upvoteAnswer({
           answerId: JSON.parse(itemId),
@@ -77,6 +94,7 @@ const Votes = ({
           hasdownVoted,
           path: pathname,
         });
+        setIsVoting(false);
       }
 
       // return toast({
@@ -94,6 +112,7 @@ const Votes = ({
           hasdownVoted,
           path: pathname,
         });
+        setIsVoting(false);
       } else if (type === "Answer") {
         await downvoteAnswer({
           answerId: JSON.parse(itemId),
@@ -102,6 +121,7 @@ const Votes = ({
           hasdownVoted,
           path: pathname,
         });
+        setIsVoting(false);
       }
 
       // return toast({
