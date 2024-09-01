@@ -29,7 +29,6 @@ const AllAnswers = async ({
     page: page ? +page : 1,
     sortBy: filter,
   });
-  console.log("result:", result.answers[0].downvotes, Date.now());
 
   return (
     <div className="mt-11">

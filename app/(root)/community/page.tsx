@@ -1,4 +1,3 @@
-import UserCard from "@/components/cards/UserCard";
 import Filter from "@/components/shared/Filter";
 import Pagination from "@/components/shared/Pagination";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
@@ -6,13 +5,22 @@ import { UserFilters } from "@/constants/filters";
 import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import Link from "next/link";
-import React from "react";
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+export const metadata: Metadata = {
+  title: "Community | Dev Overflow",
+};
 
 const Page = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
     page: searchParams.page ? +searchParams.page : 1,
+  });
+
+  const UserCard = dynamic(() => import("@/components/cards/UserCard"), {
+    ssr: false,
   });
 
   return (
@@ -27,6 +35,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
           placeholder="Search for amazing minds"
           otherClasses="flex-1"
         />
+
         <Filter
           filters={UserFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
