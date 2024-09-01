@@ -54,12 +54,6 @@ const Votes = ({
   };
 
   const handleVote = async (action: string) => {
-    console.log("isVoting 58:", isVoting);
-    if (isVoting) {
-      console.log("Request not allowed");
-      return;
-    }
-
     if (!userId) {
       // return toast({
       //   title: "Please log in",
@@ -94,7 +88,6 @@ const Votes = ({
           hasdownVoted,
           path: pathname,
         });
-        setIsVoting(false);
       }
 
       // return toast({
@@ -112,7 +105,6 @@ const Votes = ({
           hasdownVoted,
           path: pathname,
         });
-        setIsVoting(false);
       } else if (type === "Answer") {
         await downvoteAnswer({
           answerId: JSON.parse(itemId),
@@ -121,7 +113,6 @@ const Votes = ({
           hasdownVoted,
           path: pathname,
         });
-        setIsVoting(false);
       }
 
       // return toast({
